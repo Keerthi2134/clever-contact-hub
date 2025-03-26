@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { PageTransition, SlideUp } from "./ui/animations";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
@@ -292,122 +291,123 @@ const CommunicationCenter = () => {
                     <TabsTrigger value="meetings" className="text-xs">Meetings</TabsTrigger>
                     <TabsTrigger value="notes" className="text-xs">Notes</TabsTrigger>
                   </TabsList>
+                
+                  <CardContent className="px-0 py-1 flex-1 overflow-hidden">
+                    <div className="h-full overflow-y-auto subtle-scroll">
+                      {isLoading ? (
+                        <div className="p-5 space-y-4 animate-pulse">
+                          {[1, 2, 3, 4].map((i) => (
+                            <div key={i} className="h-20 bg-gray-100 rounded-md" />
+                          ))}
+                        </div>
+                      ) : (
+                        <div>
+                          <TabsContent value="emails" className="m-0">
+                            {emailCommunications.map((comm) => (
+                              <button 
+                                key={comm.id}
+                                className="w-full text-left px-5 py-3 border-b border-gray-100 hover:bg-gray-50 transition-colors"
+                              >
+                                <div className="flex space-x-3">
+                                  <div className={`w-8 h-8 rounded-full flex items-center justify-center ${getCommunicationColor(comm.type)}`}>
+                                    {getCommunicationIcon(comm.type)}
+                                  </div>
+                                  <div className="flex-1 min-w-0">
+                                    <div className="flex justify-between items-start">
+                                      <p className="font-medium text-crm-black truncate">{comm.subject}</p>
+                                      {getStatusBadge(comm.status)}
+                                    </div>
+                                    <p className="text-sm text-crm-gray truncate mt-1">{comm.contact.name}</p>
+                                    <div className="flex items-center space-x-1 mt-1">
+                                      <Clock className="h-3 w-3 text-crm-gray" />
+                                      <p className="text-xs text-crm-gray">{comm.date}</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </button>
+                            ))}
+                          </TabsContent>
+                          <TabsContent value="calls" className="m-0">
+                            {callCommunications.map((comm) => (
+                              <button 
+                                key={comm.id}
+                                className="w-full text-left px-5 py-3 border-b border-gray-100 hover:bg-gray-50 transition-colors"
+                              >
+                                <div className="flex space-x-3">
+                                  <div className={`w-8 h-8 rounded-full flex items-center justify-center ${getCommunicationColor(comm.type)}`}>
+                                    {getCommunicationIcon(comm.type)}
+                                  </div>
+                                  <div className="flex-1 min-w-0">
+                                    <div className="flex justify-between items-start">
+                                      <p className="font-medium text-crm-black truncate">{comm.subject}</p>
+                                      {getStatusBadge(comm.status)}
+                                    </div>
+                                    <p className="text-sm text-crm-gray truncate mt-1">{comm.contact.name}</p>
+                                    <div className="flex items-center space-x-1 mt-1">
+                                      <Clock className="h-3 w-3 text-crm-gray" />
+                                      <p className="text-xs text-crm-gray">{comm.date}</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </button>
+                            ))}
+                          </TabsContent>
+                          <TabsContent value="meetings" className="m-0">
+                            {meetingCommunications.map((comm) => (
+                              <button 
+                                key={comm.id}
+                                className="w-full text-left px-5 py-3 border-b border-gray-100 hover:bg-gray-50 transition-colors"
+                              >
+                                <div className="flex space-x-3">
+                                  <div className={`w-8 h-8 rounded-full flex items-center justify-center ${getCommunicationColor(comm.type)}`}>
+                                    {getCommunicationIcon(comm.type)}
+                                  </div>
+                                  <div className="flex-1 min-w-0">
+                                    <div className="flex justify-between items-start">
+                                      <p className="font-medium text-crm-black truncate">{comm.subject}</p>
+                                      {getStatusBadge(comm.status)}
+                                    </div>
+                                    <p className="text-sm text-crm-gray truncate mt-1">{comm.contact.name}</p>
+                                    <div className="flex items-center space-x-1 mt-1">
+                                      <Clock className="h-3 w-3 text-crm-gray" />
+                                      <p className="text-xs text-crm-gray">{comm.date}</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </button>
+                            ))}
+                          </TabsContent>
+                          <TabsContent value="notes" className="m-0">
+                            {noteCommunications.map((comm) => (
+                              <button 
+                                key={comm.id}
+                                className="w-full text-left px-5 py-3 border-b border-gray-100 hover:bg-gray-50 transition-colors"
+                              >
+                                <div className="flex space-x-3">
+                                  <div className={`w-8 h-8 rounded-full flex items-center justify-center ${getCommunicationColor(comm.type)}`}>
+                                    {getCommunicationIcon(comm.type)}
+                                  </div>
+                                  <div className="flex-1 min-w-0">
+                                    <div className="flex justify-between items-start">
+                                      <p className="font-medium text-crm-black truncate">{comm.subject}</p>
+                                      {getStatusBadge(comm.status)}
+                                    </div>
+                                    <p className="text-sm text-crm-gray truncate mt-1">{comm.contact.name}</p>
+                                    <div className="flex items-center space-x-1 mt-1">
+                                      <Clock className="h-3 w-3 text-crm-gray" />
+                                      <p className="text-xs text-crm-gray">{comm.date}</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </button>
+                            ))}
+                          </TabsContent>
+                        </div>
+                      )}
+                    </div>
+                  </CardContent>
                 </Tabs>
               </div>
-              <CardContent className="px-0 py-1 flex-1 overflow-hidden">
-                <div className="h-full overflow-y-auto subtle-scroll">
-                  {isLoading ? (
-                    <div className="p-5 space-y-4 animate-pulse">
-                      {[1, 2, 3, 4].map((i) => (
-                        <div key={i} className="h-20 bg-gray-100 rounded-md" />
-                      ))}
-                    </div>
-                  ) : (
-                    <div>
-                      <TabsContent value="emails" className="m-0">
-                        {emailCommunications.map((comm) => (
-                          <button 
-                            key={comm.id}
-                            className="w-full text-left px-5 py-3 border-b border-gray-100 hover:bg-gray-50 transition-colors"
-                          >
-                            <div className="flex space-x-3">
-                              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${getCommunicationColor(comm.type)}`}>
-                                {getCommunicationIcon(comm.type)}
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <div className="flex justify-between items-start">
-                                  <p className="font-medium text-crm-black truncate">{comm.subject}</p>
-                                  {getStatusBadge(comm.status)}
-                                </div>
-                                <p className="text-sm text-crm-gray truncate mt-1">{comm.contact.name}</p>
-                                <div className="flex items-center space-x-1 mt-1">
-                                  <Clock className="h-3 w-3 text-crm-gray" />
-                                  <p className="text-xs text-crm-gray">{comm.date}</p>
-                                </div>
-                              </div>
-                            </div>
-                          </button>
-                        ))}
-                      </TabsContent>
-                      <TabsContent value="calls" className="m-0">
-                        {callCommunications.map((comm) => (
-                          <button 
-                            key={comm.id}
-                            className="w-full text-left px-5 py-3 border-b border-gray-100 hover:bg-gray-50 transition-colors"
-                          >
-                            <div className="flex space-x-3">
-                              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${getCommunicationColor(comm.type)}`}>
-                                {getCommunicationIcon(comm.type)}
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <div className="flex justify-between items-start">
-                                  <p className="font-medium text-crm-black truncate">{comm.subject}</p>
-                                  {getStatusBadge(comm.status)}
-                                </div>
-                                <p className="text-sm text-crm-gray truncate mt-1">{comm.contact.name}</p>
-                                <div className="flex items-center space-x-1 mt-1">
-                                  <Clock className="h-3 w-3 text-crm-gray" />
-                                  <p className="text-xs text-crm-gray">{comm.date}</p>
-                                </div>
-                              </div>
-                            </div>
-                          </button>
-                        ))}
-                      </TabsContent>
-                      <TabsContent value="meetings" className="m-0">
-                        {meetingCommunications.map((comm) => (
-                          <button 
-                            key={comm.id}
-                            className="w-full text-left px-5 py-3 border-b border-gray-100 hover:bg-gray-50 transition-colors"
-                          >
-                            <div className="flex space-x-3">
-                              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${getCommunicationColor(comm.type)}`}>
-                                {getCommunicationIcon(comm.type)}
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <div className="flex justify-between items-start">
-                                  <p className="font-medium text-crm-black truncate">{comm.subject}</p>
-                                  {getStatusBadge(comm.status)}
-                                </div>
-                                <p className="text-sm text-crm-gray truncate mt-1">{comm.contact.name}</p>
-                                <div className="flex items-center space-x-1 mt-1">
-                                  <Clock className="h-3 w-3 text-crm-gray" />
-                                  <p className="text-xs text-crm-gray">{comm.date}</p>
-                                </div>
-                              </div>
-                            </div>
-                          </button>
-                        ))}
-                      </TabsContent>
-                      <TabsContent value="notes" className="m-0">
-                        {noteCommunications.map((comm) => (
-                          <button 
-                            key={comm.id}
-                            className="w-full text-left px-5 py-3 border-b border-gray-100 hover:bg-gray-50 transition-colors"
-                          >
-                            <div className="flex space-x-3">
-                              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${getCommunicationColor(comm.type)}`}>
-                                {getCommunicationIcon(comm.type)}
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <div className="flex justify-between items-start">
-                                  <p className="font-medium text-crm-black truncate">{comm.subject}</p>
-                                  {getStatusBadge(comm.status)}
-                                </div>
-                                <p className="text-sm text-crm-gray truncate mt-1">{comm.contact.name}</p>
-                                <div className="flex items-center space-x-1 mt-1">
-                                  <Clock className="h-3 w-3 text-crm-gray" />
-                                  <p className="text-xs text-crm-gray">{comm.date}</p>
-                                </div>
-                              </div>
-                            </div>
-                          </button>
-                        ))}
-                      </TabsContent>
-                    </div>
-                  )}
-                </div>
-              </CardContent>
               <CardFooter className="px-5 py-3 border-t border-gray-100">
                 <Button variant="ghost" size="sm" className="w-full text-crm-blue">
                   View All <ChevronRight className="ml-1 h-3 w-3" />
